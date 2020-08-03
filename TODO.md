@@ -14,21 +14,21 @@
 ## Backend
 
 * [ ] Main Server
-    * [ ] Routing to homepage
-    * [ ] Storing and displaying messages when the homepage loads
+    * [x] Routing to homepage
+    * [x] Storing and displaying messages when the homepage loads
 
 ## Front End
   
-* [ ] Index.html (Home page)
-    * [ ] Basic rendering of messages
-    * [ ] Basic Form input (Username, Message)
-    * [ ] Page release on send
+* [x] Index.html (Home page)
+    * [x] Basic rendering of messages
+    * [x] Basic Form input (Username, Message)
+    * [x] Page release on send
 
 ## Backend
 
 * [ ] Database
-    * [ ] Logs username and message
-    * [ ] Gets all messages
+    * [x] Logs username and message
+    * [x] Gets all messages
     * [ ] Filters messages
     * [ ] Message Filter (Filter security)
       
