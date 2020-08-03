@@ -1,42 +1,56 @@
 from flask import Flask, render_template, request
 
-# from flask_sqlalchemy import SQLAlchemy
+from MessageDataBase import *
+
+from flask_sqlalchemy import SQLAlchemy
 
 """ MAIN CONFIG """
 
 main = Flask(__name__)
 
-# main.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///DataBase.sqlite3"
-# main.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+main.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Message.sqlite3"
+main.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# DataBase = SQLAlchemy(main)
+DataBase = SQLAlchemy(main)
 
 """ GLOBAL VARIABLES """
 
-Msgs = ["Hello World"]
+Msgs = [
+    "Hello World",
+    "This is a test",
+    "This is a message"
+]
+
+""" DATABASE """
+
+# class Message(DataBase.Model):
+#       _id = DataBase.Column("_id", DataBase.Integer, primary_key=True)
+#       username = DataBase.Column("username", DataBase.String(80), nullable=False)
+#       message = DataBase.Column("message", DataBase.String(100), nullable=False)
+
+#       def __init__(self, username, message):
+#             self.username = username
+#             self.message = message
+
 
 """ WEBSITE ROUTES """
 
 @main.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "POST":
-
         username = request.form["username"]
         message = request.form["message"]
+        
+        query = Message(str(username), str(message))
+
+        DataBase.session.add(query)
+        DataBase.session.commit()
 
         GetAllMessages()
-
-        print(Msgs)
-
         return render_template("index.html", messages=Msgs)
-
     else:
-        print(Msgs)
-
         GetAllMessages()
         return render_template("index.html", messages=Msgs)
-
-
 
 """ Start """
 
