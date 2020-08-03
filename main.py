@@ -1,6 +1,21 @@
 from flask import Flask, render_template, request
 
+# from flask_sqlalchemy import SQLAlchemy
+
+""" MAIN CONFIG """
+
 main = Flask(__name__)
+
+# main.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///DataBase.sqlite3"
+# main.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# DataBase = SQLAlchemy(main)
+
+""" GLOBAL VARIABLES """
+
+Msgs = ["Hello World"]
+
+""" WEBSITE ROUTES """
 
 @main.route("/", methods=["POST", "GET"])
 def index():
@@ -9,13 +24,22 @@ def index():
         username = request.form["username"]
         message = request.form["message"]
 
-        print(f"User: {username} || Message: {message}"
+        GetAllMessages()
 
-        return render_template("index.html")
+        print(Msgs)
+
+        return render_template("index.html", messages=Msgs)
+
     else:
-        return render_template("index.html")
+        print(Msgs)
+
+        GetAllMessages()
+        return render_template("index.html", messages=Msgs)
 
 
+
+""" Start """
 
 if __name__ == "__main__":
+    DataBase.create_all()
     main.run(port="8000")
