@@ -13,14 +13,6 @@ main.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 DataBase = SQLAlchemy(main)
 
-""" GLOBAL VARIABLES """
-
-Msgs = [
-    "Hello World",
-    "This is a test",
-    "This is a message"
-]
-
 """ DATABASE """
 
 # class Message(DataBase.Model):
@@ -40,17 +32,17 @@ def index():
     if request.method == "POST":
         username = request.form["username"]
         message = request.form["message"]
-        
+
         query = Message(str(username), str(message))
 
         DataBase.session.add(query)
         DataBase.session.commit()
 
-        GetAllMessages()
-        return render_template("index.html", messages=Msgs)
+        
+        return render_template("index.html", messages=GetAllMessages())
     else:
         GetAllMessages()
-        return render_template("index.html", messages=Msgs)
+        return render_template("index.html", messages=GetAllMessages())
 
 """ Start """
 

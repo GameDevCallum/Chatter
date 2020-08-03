@@ -26,13 +26,13 @@
 
 ## Backend
 
-* [ ] Database
+* [x] Database
     * [x] Logs username and message
     * [x] Gets all messages
     * [ ] Filters messages
-    * [ ] Message Filter (Filter security)
+    * [x] Message Filter (Filter security)
       
 * [ ] Database with Back end
-    * [ ] Stores username and message from PULL request
+    * [x] Stores username and message from PULL request
     * [ ] Filters username and message (Filters bad words)
-    * [ ] Gets username and password on client load
+    * [x] Gets username and message on client load

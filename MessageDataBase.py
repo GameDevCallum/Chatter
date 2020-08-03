@@ -1,5 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
+import numpy as np
+
 from main import DataBase
 
 
@@ -13,7 +15,10 @@ class Message(DataBase.Model):
             self.message = message
 
 def GetAllMessages():
+      toReturn = []
       for msg in Message.query.all():
             msg_user = msg.username
             msg_msg = msg.message
-            print(f"User: {msg_user} || Message: {msg_msg}")
+            toReturn.append(f"Username: {msg_user} || Message: {msg_msg}")
+
+      return np.flip(toReturn)
