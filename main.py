@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 
 from MessageDataBase import *
 
@@ -12,17 +12,6 @@ main.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Message.sqlite3"
 main.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 DataBase = SQLAlchemy(main)
-
-""" DATABASE """
-
-# class Message(DataBase.Model):
-#       _id = DataBase.Column("_id", DataBase.Integer, primary_key=True)
-#       username = DataBase.Column("username", DataBase.String(80), nullable=False)
-#       message = DataBase.Column("message", DataBase.String(100), nullable=False)
-
-#       def __init__(self, username, message):
-#             self.username = username
-#             self.message = message
 
 
 """ WEBSITE ROUTES """
@@ -41,8 +30,12 @@ def index():
         
         return render_template("index.html", messages=GetAllMessages())
     else:
-        GetAllMessages()
         return render_template("index.html", messages=GetAllMessages())
+
+@main.route("/del")
+def delete():
+    DeleteAll()
+    return url_for(index)
 
 """ Start """
 
