@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, Response
 
 from MessageDataBase import *
 
@@ -27,10 +27,13 @@ def index():
         DataBase.session.add(query)
         DataBase.session.commit()
 
-        
-        return render_template("index.html", messages=GetAllMessages())
+        WriteToJson()
+
+        return render_template("index.html")
     else:
-        return render_template("index.html", messages=GetAllMessages())
+        WriteToJson()
+
+        return render_template("index.html")
 
 @main.route("/del")
 def delete():

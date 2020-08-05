@@ -1,6 +1,3 @@
-const button = document.getElementById("btn")
-
-button.onclick = function()
-{
-      console.log("Pressed");
-}
+$.getJSON("../static/test.json", function(json) {
+      console.log(json); // this will show the info it in firebug console
+});

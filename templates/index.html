@@ -4,11 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../static/index.css">
-        <!-- <script type="text/javascript" src="../static/java.js" async></script> -->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+        <script type="text/javascript" src="../static/LoadMessageData.js" defer></script>
+
         <title>Index</title>
     </head>
     <body>
-        <form action="" method="POST">
+        <p id="test"></p>
+
+        <form action="#" method="POST">
             <label>Enter Username</label>
             <br><br>
             <input name="username" type="text" placeholder="Username"/>
@@ -19,10 +24,6 @@
             <br><br>
             <button type="submit">Submit</button>
         </form>
-
-        {% for m in messages %}
-            <p>{{m}}</p>
-        {% endfor %}
 
     </body>
 </html>
