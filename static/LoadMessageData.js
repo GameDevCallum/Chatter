@@ -1,7 +1,9 @@
 function LoadMessages()
 {
       $.getJSON("http://127.0.0.1:8000/static/MessageData.json", function(json) {
-            for (var i = 0; i < Object.keys(json.Messages).length; i++)
+            const messageList = json.Messages.reverse();
+
+            for (var i = 0; i < Object.keys(messageList).length; i++)
             {
                   var container = document.createElement("div");
                   document.body.appendChild(container);
@@ -19,4 +21,13 @@ function LoadMessages()
       });
 }
 
-LoadMessages()
+LoadMessages();
+
+function PageReload() {
+      setInterval(function()
+      {
+            LoadMessages()
+      }, 5000);
+}
+
+PageReload();
