@@ -3,9 +3,11 @@ from flask import render_template
 from flask import request, Response
 from flask import redirect, url_for
 
+from flask_sqlalchemy import SQLAlchemy
+import bcrypt
+
 from MessageDataBase import *
 
-from flask_sqlalchemy import SQLAlchemy
 
 """ MAIN CONFIG """
 
@@ -15,6 +17,8 @@ main.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///Message.sqlite3"
 main.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 DataBase = SQLAlchemy(main)
+
+text_encoder = 'utf-8'
 
 
 """ WEBSITE ROUTES """
@@ -37,6 +41,23 @@ def index():
         WriteToJson()
 
         return render_template("index.html")
+
+@main.route("/signup", methods=["POST", "GET"])
+def SingUp():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        hashedPassword = bcrypt.hashpw(bytes(password, text_encoder), bcrypt.gensalt())
+
+        print(f"Password: {password}")
+        print(f"Hash: {hashedPassword}")
+
+        return redirect(url_for("index"))
+    else:
+        return render_template("signup.html")
+
+
 
 @main.route("/del")
 def delete():
