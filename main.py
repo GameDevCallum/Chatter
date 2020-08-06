@@ -1,4 +1,7 @@
-from flask import Flask, render_template, request, url_for, Response
+from flask import Flask
+from flask import render_template
+from flask import request, Response
+from flask import redirect, url_for
 
 from MessageDataBase import *
 
@@ -38,7 +41,8 @@ def index():
 @main.route("/del")
 def delete():
     DeleteAll()
-    return url_for(index)
+    WriteToJson()
+    return redirect(url_for("index"))
 
 """ Start """
 
